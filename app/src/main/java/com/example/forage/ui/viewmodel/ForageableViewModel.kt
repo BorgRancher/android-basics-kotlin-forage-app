@@ -53,7 +53,7 @@ class ForageableViewModel(
             notes = notes
         )
 
-    // launch a coroutine and call the DAO method to add a Forageable to the database within it
+        // launch a coroutine and call the DAO method to add a Forageable to the database within it
 
         viewModelScope.launch(coroutineDispatcher) {
             forageableDao.insertForageable(forageable)
@@ -91,7 +91,6 @@ class ForageableViewModel(
     }
 }
 
-
 class ForageableViewModelFactory (
     private val forageableDao: ForageableDao
 ) : ViewModelProvider.Factory {
@@ -103,3 +102,7 @@ class ForageableViewModelFactory (
         throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
+
+
+
+
