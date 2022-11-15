@@ -15,7 +15,9 @@
  */
 package com.example.forage.data
 
-import androidx.room.Dao
+import androidx.room.*
+import com.example.forage.model.Forageable
+import kotlinx.coroutines.flow.Flow
 
 /**
  * Data Access Object for database interaction.
@@ -23,14 +25,26 @@ import androidx.room.Dao
 @Dao
 interface ForageableDao {
 
-    // TODO: implement a method to retrieve all Forageables from the database
+    // implement a method to retrieve all Forageables from the database
+    @Query("SELECT * FROM forageable_table")
+    fun getAllForageables(): Flow<List<Forageable>>
 
-    // TODO: implement a method to retrieve a Forageable from the database by id
+    // implement a method to retrieve a Forageable from the database by id
+    @Query("SELECT * FROM forageable_table WHERE id = :id")
+    fun getForageableById(id: Long): Flow<Forageable>
 
-    // TODO: implement a method to insert a Forageable into the database
+    // implement a method to insert a Forageable into the database
     //  (use OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertForageable(forageable: Forageable): Long
 
-    // TODO: implement a method to update a Forageable that is already in the database
 
-    // TODO: implement a method to delete a Forageable from the database.
+    // implement a method to update a Forageable that is already in the database
+    @Update
+    fun updateForageable(forageable: Forageable): Int
+
+    // implement a method to delete a Forageable from the database.
+    @Delete
+    fun deleteForageable(forageable: Forageable): Int
+
 }
